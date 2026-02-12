@@ -1,0 +1,638 @@
+:root{
+  --bg-soft-1: #e6f3ff; /* suave claro */
+  --bg-soft-2: #cfe8ff; /* suave medio */
+  --card-blue: #9fc9ff; /* tarjeta ligeramente más oscura */
+  --card-blue-deep: #84baff;
+  --accent: #ffffff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Playfair Display', Georgia, serif;
+  background: linear-gradient(180deg,var(--bg-soft-1) 0%, var(--bg-soft-2) 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:3rem 1rem;
+}
+.wrap{width:100%;max-width:1100px}
+.title{
+  text-align:center;
+  font-family: 'Dancing Script', 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  color: white;
+  margin: 0 0 1.6rem 0;
+  text-shadow: 0 6px 18px rgba(2,6,23,0.45);
+}
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap:1.1rem;
+}
+
+/* Forzar exactamente 5 columnas en pantallas anchas (dos filas de 5 tarjetas)
+   y mantener responsividad en pantallas pequeñas */
+@media (min-width:1100px){
+  .grid{ grid-template-columns: repeat(5, 1fr); }
+}
+.card{
+  perspective: 1100px;
+}
+.card-inner{
+  position:relative;
+  width:100%;
+  padding-top:100%; /* square */
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+.card-front, .card-back{
+  position:absolute;
+  inset:0;
+  border-radius:14px;
+  overflow:hidden;
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  box-shadow: 0 8px 22px rgba(2,6,23,0.28);
+}
+.card-front{
+  background: linear-gradient(180deg, var(--card-blue-deep), var(--card-blue));
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--accent);
+}
+.card-back{
+  background: #ffffff; /* trasera completamente blanca */
+  transform: rotateY(180deg);
+  color: #06233a;
+  padding:1.6rem;
+}
+.card.flipped .card-inner{transform: rotateY(180deg)}
+.front-content{display:flex;align-items:center;justify-content:center;gap:0}
+.num{font-size: clamp(2.4rem,6vw,4rem);color:var(--accent);font-weight:700;letter-spacing:1px;font-family: 'Playfair Display', serif}
+/* ocultar cualquier texto adicional en la parte frontal: solo se verá el número */
+.front-content .hint{display:none !important;}
+
+/* Efectos interactivos al pasar el mouse */
+.card{transition: transform 220ms ease, box-shadow 220ms ease}
+.card:hover{cursor:pointer;transform:translateY(-8px)}
+.card:hover .card-front{box-shadow: 0 20px 40px rgba(2,6,23,0.36), 0 0 22px rgba(132,186,255,0.12);}
+.card:hover .num{filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));}
+.card-back p{margin:0;font-family:'Winter Draw', 'Dancing Script', 'Playfair Display', serif;font-size:1.15rem;line-height:1.35;text-align:center;color:#000000}
+
+/* Small enhancements */
+.card:active{transform:translateY(1px)}
+@media (max-width:480px){
+  body{padding:2rem .6rem}
+  .grid{gap:0.9rem}
+}
+
+/* Botón Siguiente en la primera página */
+.btn-next{
+  display:inline-block;
+  padding:0.6rem 1rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+  color:#06233a;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow: 0 8px 20px rgba(6,35,58,0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-next:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(6,35,58,0.22);cursor:pointer}
+
+/* Página 2: cielo nocturno con estrellas sutiles */
+.black-sky{
+  background: radial-gradient(ellipse at bottom, #000000 0%, #000000 100%);
+  min-height:100vh;
+  color:#ffffff;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:3rem 1rem;
+}
+.sky-wrap{width:100%;max-width:1100px;text-align:center}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars{position:absolute;inset:0;pointer-events:none;z-index:1}
+.star{position:absolute;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 70%);opacity:0.9;transform:scale(1);animation-name:twinkle;animation-iteration-count:infinite;animation-timing-function:ease-in-out;box-shadow:0 0 8px rgba(180,220,255,0.22);filter:blur(0.4px);mix-blend-mode:screen}
+@keyframes twinkle{0%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}100%{opacity:.25;transform:scale(.8)}}
+
+.counter-box{background: rgba(255,255,255,0.04);backdrop-filter: blur(6px);padding:1.6rem 2rem;border-radius:12px;display:inline-block;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+.counter{font-family:'Winter Draw', 'Dancing Script', serif;font-size:clamp(1.6rem,4vw,2.4rem);color:#fff;letter-spacing:1px}
+.counter small{display:block;font-size:0.85rem;color:rgba(255,255,255,0.75);margin-top:0.4rem}
+
+/* --- Styles para el juego (page3) --- */
+.game-area{max-width:920px;margin:0 auto}
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.hud .score,.hud .best{background:rgba(255,255,255,0.95);color:#06233a;padding:.45rem .7rem;border-radius:10px;font-weight:700;box-shadow:0 8px 20px rgba(6,35,58,0.06)}
+.canvas-wrap{background:#041226;border-radius:14px;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);}
+#game{display:block;width:100%;height:calc(100vw*0.6);max-height:640px;border-radius:8px;background:linear-gradient(#02111f,#00121b);}
+
+/* overlay de Game Over */
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(rgba(2,6,23,0.45),rgba(2,6,23,0.6));backdrop-filter: blur(3px);z-index:60}
+.overlay.hidden{display:none}
+.overlay-card{background:#fff;border-radius:12px;padding:1.2rem 1.4rem;min-width:260px;max-width:420px;text-align:center;box-shadow:0 18px 60px rgba(2,6,23,0.35)}
+.overlay-card h2{margin:0 0 .4rem 0;font-family:'Dancing Script', 'Playfair Display',serif;color:#06233a}
+.overlay-card p{margin:0;color:#333}
+
+/* ajustar canvas responsivo */
+@media (max-width:640px){
+  #game{height:calc(100vw*0.9)}
+  .hud{flex-direction:column;gap:.6rem}
+}
+
+/* animación y estilo para el botón que aparece tras puntaje 5 */
+.next-action{opacity:0;transform:translateY(10px);transition:opacity 480ms ease, transform 480ms cubic-bezier(.2,.9,.3,1);pointer-events:none}
+.next-action.show{opacity:1;transform:translateY(0);pointer-events:auto}
+
+/* Overlay grande centrado para 'Siguiente' al llegar a 5 corazones */
+.next-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:80;pointer-events:none;opacity:0;transition:opacity 480ms ease, transform 480ms cubic-bezier(.2,.9,.3,1);transform:translateY(8px);background:rgba(2,6,23,0.45)}
+.next-overlay.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.next-overlay .btn-next{padding:1rem 1.6rem;font-size:1.25rem;border-radius:14px;box-shadow:0 18px 50px rgba(6,35,58,0.28)}
+
+/* Styles para page4: fotos colgadas estilo polaroid y carta doblada */
+.gallery-area{max-width:1100px;margin:2rem auto;position:relative;min-height:100vh}
+.line{display:flex;justify-content:space-between;gap:1.4rem;align-items:flex-end;margin:0 auto;max-width:920px}
+.line.lower{margin-top:1.2rem}
+.polaroid{width:170px;padding:10px;background:linear-gradient(180deg,#fff,#f7f7f7);border-radius:8px;box-shadow:0 18px 40px rgba(2,6,23,0.6);transform-origin:center top;transition:transform 420ms cubic-bezier(.2,.9,.3,1);overflow:visible;position:absolute}
+.polaroid .frame{display:block;overflow:hidden;border-radius:6px;background:#fff;padding:8px;transform-origin:center center}
+.polaroid img{display:block;width:100%;height:160px;object-fit:cover;border-radius:4px}
+
+/* Base rotation applied to inner frame, so outer sway animation adds on top */
+.polaroid.p1 .frame{transform:rotate(-8deg)}
+.polaroid.p2 .frame{transform:rotate(6deg)}
+.polaroid.p3 .frame{transform:rotate(-4deg)}
+.polaroid.p4 .frame{transform:rotate(7deg)}
+.polaroid.p5 .frame{transform:rotate(-5deg)}
+.polaroid.p6 .frame{transform:rotate(4deg)}
+.polaroid.p7 .frame{transform:rotate(-2deg)}
+.polaroid.hover{transform:rotate(-3deg) translateY(-8px)}
+.polaroid.p1{transform:rotate(-6deg)}
+.polaroid.p2{transform:rotate(4deg)}
+.polaroid.p3{transform:rotate(-2deg)}
+.polaroid.p4{transform:rotate(6deg)}
+.polaroid.p5{transform:rotate(-4deg)}
+.polaroid.p6{transform:rotate(3deg)}
+.polaroid.p7{transform:rotate(-1deg)}
+
+/* cuerda y pinzas (simples decorativos) */
+.gallery-area .line::before{display:none}
+.polaroid{position:relative}
+.polaroid::before{content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:14px;height:8px;background:#d2b6a0;border-radius:2px;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+
+/* Letter folded styles - HOJA DOBLADA VISTA EN PERSPECTIVA */
+.letter-wrapper{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:100;
+  width:100%;max-width:100%;
+  pointer-events:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.letter{
+  width:420px;
+  max-width:90vw;
+  height:320px;
+  cursor:pointer;
+  position:relative;
+  perspective:1800px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0;
+}
+
+/* HOJA CERRADA: dos mitades que parecen dobladas */
+.letter-left,
+.letter-right{
+  width:50%;
+  height:100%;
+  background:#fff;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+  transform-origin:center center;
+  border-radius:3px;
+  transition:transform 1000ms cubic-bezier(0.25,0.46,0.45,0.94);
+  box-shadow:
+    0 50px 150px rgba(0,0,0,0.6),
+    inset -8px 0 20px rgba(0,0,0,0.08);
+}
+
+/* Perspectiva: mitad izquierda rota hacia el fondo */
+.letter-left{
+  transform:rotateY(-28deg);
+  background:linear-gradient(270deg, #efefef 0%, #f9f9f9 50%, #fff 100%);
+  border-right:1.5px solid rgba(0,0,0,0.15);
+  border-radius:3px 0 0 3px;
+  box-shadow:
+    0 50px 150px rgba(0,0,0,0.6),
+    inset -12px 0 30px rgba(0,0,0,0.12),
+    inset 0 0 40px rgba(0,0,0,0.05);
+}
+
+/* Perspectiva: mitad derecha rota hacia el fondo */
+.letter-right{
+  transform:rotateY(28deg);
+  background:linear-gradient(90deg, #fff 0%, #f9f9f9 50%, #efefef 100%);
+  border-left:1.5px solid rgba(0,0,0,0.15);
+  border-radius:0 3px 3px 0;
+  box-shadow:
+    0 50px 150px rgba(0,0,0,0.6),
+    inset 12px 0 30px rgba(0,0,0,0.12),
+    inset 0 0 40px rgba(0,0,0,0.05);
+}
+
+/* Pliegue/spine - MUY VISIBLE */
+.letter-spine{
+  position:absolute;
+  width:3px;
+  height:90%;
+  background:linear-gradient(90deg, 
+    rgba(0,0,0,0), 
+    rgba(0,0,0,0.15) 30%, 
+    rgba(0,0,0,0.25) 50%, 
+    rgba(0,0,0,0.15) 70%, 
+    rgba(0,0,0,0));
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* LETRA ABIERTA: ambas mitades rotan hacia afuera y se aplanan */
+.letter.open .letter-left{
+  transform:rotateY(-95deg);
+}
+
+.letter.open .letter-right{
+  transform:rotateY(95deg);
+}
+
+/* Contenido interior (oculto cuando está cerrado) */
+.letter-inner{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  border-radius:3px;
+  padding:50px 40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:0;
+  transform:scale(0.85);
+  transition:opacity 700ms ease 500ms, transform 700ms ease 500ms;
+  pointer-events:none;
+  box-shadow:0 50px 150px rgba(0,0,0,0.6);
+  z-index:5;
+  overflow:hidden;
+}
+
+.letter.open .letter-inner{
+  opacity:1;
+  transform:scale(1);
+  pointer-events:auto;
+}
+
+.letter-inner h2{
+  margin:0 0 2.5rem 0;
+  color:#06233a;
+  font-size:1.9rem;
+  font-weight:700;
+  line-height:1.3;
+}
+
+.buttons-container{
+  display:flex;
+  gap:2.5rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn-yes,
+.btn-no{
+  padding:0.9rem 2.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+  transition:all 300ms cubic-bezier(0.34,1.56,0.64,1);
+  font-family:'Dancing Script', serif;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-yes{
+  background:linear-gradient(135deg, #ff6b9d 0%, #ff4757 100%);
+  color:#fff;
+}
+
+.btn-yes:hover{
+  transform:translateY(-5px) scale(1.05);
+  box-shadow:0 15px 40px rgba(255,71,87,0.5);
+}
+
+.btn-yes:active{
+  transform:translateY(-2px) scale(1.02);
+}
+
+.btn-no{
+  background:#fff;
+  color:#06233a;
+  border:2.5px solid #06233a;
+}
+
+.btn-no:hover{
+  background:#f8f8f8;
+  box-shadow:0 12px 35px rgba(6,35,58,0.3);
+}
+
+/* Contenedor de flores que caen */
+.flowers-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:50;
+}
+
+.flower{
+  position:fixed;
+  font-size:2.2rem;
+  pointer-events:none;
+  animation:fallFlowers 4s ease-in forwards;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+@keyframes fallFlowers{
+  0%{
+    opacity:0.9;
+    transform:translateY(0) translateX(0) rotate(0deg) scale(1);
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(110vh) translateX(var(--tx, 0px)) rotate(540deg) scale(0.1);
+  }
+}
+
+/* overlay for accessibility */
+.next-overlay .btn-next{background:linear-gradient(180deg,#fff,#fffbfb)}
+
+/* Rope SVG positioning */
+.rope-svg{position:absolute;top:6.5vh;left:0;width:100%;height:140px;z-index:9;pointer-events:none}
+
+/* hilo fino que conecta la cuerda con la foto (visualmente por encima de la cuerda) */
+.polaroid .string{
+  position:absolute;
+  top:-6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  height:38px;
+  background: linear-gradient(180deg,#c9a884,#b98a63);
+  box-shadow:0 6px 10px rgba(0,0,0,0.28);
+  border-radius:2px;
+  z-index:10;
+  opacity:0.95;
+}
+
+/* Mejor textura de papel dentro del marco */
+.polaroid .frame{
+  display:block;overflow:hidden;border-radius:6px;background:#fff;padding:8px;transform-origin:center center;position:relative;
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98)), repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 6px);
+}
+.polaroid .frame img{box-shadow:0 6px 22px rgba(2,6,23,0.18);border-radius:4px}
+
+/* Acentuar la profundidad del polaroid como papel: borde inferior más grueso y sombra interna ligera */
+.polaroid{width:170px;padding:12px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:8px;box-shadow:0 26px 60px rgba(2,6,23,0.6), inset 0 -6px 12px rgba(0,0,0,0.04);transform-origin:center top;transition:transform 420ms cubic-bezier(.2,.9,.3,1);overflow:visible;position:absolute;z-index:12}
+
+/* Pin: detalle de madera + pequeño orificio del clavo */
+.polaroid .pin{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:30px;height:18px;border-radius:3px;background:linear-gradient(180deg,#e9d2bb 0%,#cfa383 60%,#b88a67 100%);box-shadow:0 10px 22px rgba(0,0,0,0.42), inset 0 3px 6px rgba(255,255,255,0.26);z-index:22}
+.polaroid .pin::after{content:'';position:absolute;left:50%;top:3px;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#f6f6f6,#bfbfbf);box-shadow:0 3px 6px rgba(0,0,0,0.35)}
+.polaroid .pin::before{content:'';position:absolute;left:50%;top:11px;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:rgba(0,0,0,0.18);box-shadow:0 2px 6px rgba(0,0,0,0.45);opacity:0.9}
+
+
+/* Mejora visual: cuerda texturizada, pinzas 3D y sombras suaves para polaroids */
+/* Reemplaza la línea sencilla anterior por una cuerda más gruesa y con textura */
+.gallery-area .line::before{
+  content:'';
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:14px;
+  width:80%;
+  height:10px;
+  border-radius:999px;
+  background: repeating-linear-gradient(90deg, #7d5a3f 0 6px, #a88663 6px 12px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.35), inset 0 2px 6px rgba(255,255,255,0.05);
+  filter: saturate(.9) contrast(.98);
+}
+/* ligera curvatura visual: una sombra/halo para sugerir la caída natural */
+.gallery-area .line::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) rotate(-0.6deg);
+  top:22px;
+  width:64%;
+  height:10px;
+  border-radius:999px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.12), rgba(0,0,0,0));
+  pointer-events:none;
+}
+
+/* Clamps / pinzas: diseño más detallado y 3D usando pseudo-elementos */
+.polaroid{position:relative}
+.polaroid::before{ /* cuerpo de la pinza (decorativo si no hay .pin) */
+  content:'';
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%) rotate(-6deg);
+  width:28px;
+  height:16px;
+  border-radius:4px;
+  background: linear-gradient(180deg,#e9d2bb 0%,#cfa383 60%,#b88a67 100%);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.36), inset 0 3px 6px rgba(255,255,255,0.28);
+  z-index:20;
+}
+.polaroid::after{ /* pequeño relieve metálico/hinge */
+  content:'';
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;height:6px;border-radius:50%;
+  background: radial-gradient(circle,#f6f6f6,#bfbfbf);
+  box-shadow:0 3px 6px rgba(0,0,0,0.35);
+  z-index:21;
+}
+
+/* Pin real (elemento .pin dentro de cada polaroid) — se coloca por encima de la cuerda */
+.polaroid .pin{
+  position:absolute;
+  top:-28px;
+  left:50%;
+  transform:translateX(-50%);
+  width:28px;
+  height:16px;
+  border-radius:3px;
+  background:linear-gradient(180deg,#e9d2bb 0%,#cfa383 60%,#b88a67 100%);
+  box-shadow:0 8px 18px rgba(0,0,0,0.36), inset 0 3px 6px rgba(255,255,255,0.28);
+  z-index:22;
+}
+.polaroid .pin::after{content:'';position:absolute;left:50%;top:2px;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#f6f6f6,#bfbfbf);box-shadow:0 3px 6px rgba(0,0,0,0.35)}
+
+/* Balanceo sutil y pausable al hover (más natural) */
+@keyframes gentleSway{0%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}100%{transform:rotate(-3deg)}}
+.polaroid{animation:gentleSway 6.5s ease-in-out infinite;transform-origin:center top;z-index:12}
+.polaroid .frame{transition:transform 420ms cubic-bezier(.2,.9,.3,1)}
+.polaroid.hover{animation-play-state:paused;transform:translateY(-10px) rotate(0deg) scale(1.02)}
+
+/* Small variations per position keep motion organic */
+.polaroid.p1{animation-duration:5.6s;animation-delay:0s;left:-10%;top:64vh}
+.polaroid.p2{animation-duration:6.4s;animation-delay:0.4s;left:8%;top:48vh}
+.polaroid.p3{animation-duration:5.9s;animation-delay:0.9s;left:-10%;top:50vh}
+.polaroid.p4{animation-duration:6.8s;animation-delay:0.2s;left:93%;top:-27vh}
+.polaroid.p5{animation-duration:5.2s;animation-delay:0.5s;left:75%;top: -42vh}
+.polaroid.p6{animation-duration:6.1s;animation-delay:0.7s;left:93%;top:-42vh}
+.polaroid.p7{animation-duration:5.7s;animation-delay:0.3s;left:18%;top:8vh}
+
+/* stickers: menos sombra, cinta decorativa y apariencia pegada */
+.polaroid.sticker{box-shadow:0 8px 18px rgba(2,6,23,0.28);padding:10px;background:linear-gradient(180deg,#fff,#f9f9f9)}
+.polaroid.sticker::before{content:'';position:absolute;left:50%;top:-12px;transform:translateX(-50%) rotate(-6deg);width:38px;height:12px;background:linear-gradient(180deg,rgba(255,235,200,0.96),rgba(255,230,180,0.96));border-radius:3px;box-shadow:0 6px 10px rgba(0,0,0,0.12);z-index:23}
+.polaroid.sticker .string{height:22px;opacity:0.6}
+
+/* pausa sutil de polaroids cuando la carta está abierta */
+.gallery-area.focused .polaroid{animation-play-state:paused;opacity:0.95;transform:translateY(-6px)}
+
+/* Añadir ligero halo/spot sobre la escena para foco romántico */
+.black-sky::before{content:'';position:fixed;left:50%;top:18vh;transform:translateX(-50%);width:70vmin;height:70vmin;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,0.04), rgba(255,255,255,0) 45%);pointer-events:none;z-index:2}
+
+/* Reproductor de música (música de fondo) */
+.music-player{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border-radius:50px;
+  padding:10px 16px;
+  z-index:150;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  border:1px solid rgba(255,255,255,0.2);
+}
+
+.music-btn{
+  background:none;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+  transition:all 300ms ease;
+  padding:8px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  background:rgba(255,107,154,0.3);
+}
+
+.music-btn:hover{
+  background:rgba(255,107,154,0.6);
+  transform:scale(1.1);
+}
+
+.music-btn.playing::after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:2px solid #ff6b9a;
+  animation:pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%{ transform:scale(1); opacity:1; }
+  100%{ transform:scale(1.3); opacity:0; }
+}
+
+.music-volume{
+  display:flex;
+  align-items:center;
+}
+
+.volume-slider{
+  width:100px;
+  height:4px;
+  -webkit-appearance:none;
+  appearance:none;
+  background:rgba(255,255,255,0.3);
+  border-radius:2px;
+  outline:none;
+  cursor:pointer;
+}
+
+.volume-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;
+  height:14px;
+  background:#ff6b9a;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+.volume-slider::-moz-range-thumb{
+  width:14px;
+  height:14px;
+  background:#ff6b9a;
+  border-radius:50%;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Responsive: en pantallas pequeñas */
+@media (max-width:768px){
+  .music-player{
+    bottom:20px;
+    right:20px;
+    padding:8px 12px;
+  }
+  
+  .music-btn{
+    width:36px;
+    height:36px;
+    font-size:1.2rem;
+  }
+  
+  .volume-slider{
+    width:70px;
+  }
+}
+
+/* Ajustar el cielo oscuro para que no cubra el reproductor */
+
+

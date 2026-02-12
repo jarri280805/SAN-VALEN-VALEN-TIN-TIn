@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Noche Estrellada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700&family=Winter+Draw&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="black-sky">
+  <!-- REPRODUCTOR DE MÚSICA -->
+  <div class="music-player">
+    <audio id="bgMusic" autoplay loop>
+      <source src="music/cancion2.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicPlayBtn" class="music-btn" aria-label="Play/Pause música">🎵</button>
+    <div class="music-volume">
+      <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+    </div>
+  </div>
+
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="sky-wrap">
+    <h1 class="title" style="color:#fff; text-shadow:0 6px 18px rgba(0,0,0,0.6);">Tiempo que llevo enamorado de ti &lt;3</h1>
+
+    <div class="counter-box">
+      <div id="elapsed" class="counter">0d 00:00:00</div>
+    </div>
+
+    <div class="actions" style="text-align:center;margin-top:1.2rem;">
+      <a class="btn-next" href="page3.html" aria-label="Siguiente">Siguiente</a>
+    </div>
+
+  </main>
+
+  <script src="script2.js"></script>
+  <script src="music.js"></script>
+</body>
+</html>

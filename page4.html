@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Propuesta Romántica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700&family=Winter+Draw&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="black-sky">
+  <div class="stars" aria-hidden="true"></div>
+
+  <!-- REPRODUCTOR DE MÚSICA -->
+  <div class="music-player">
+    <audio id="bgMusic" autoplay loop>
+      <source src="music/cancion4.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicPlayBtn" class="music-btn" aria-label="Play/Pause música">🎵</button>
+    <div class="music-volume">
+      <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+    </div>
+  </div>
+
+  <main class="sky-wrap">
+    <section class="gallery-area">
+      <!-- HOJA DOBLADA EN PERSPECTIVA (CENTRO) -->
+      <div class="letter-wrapper">
+        <div id="letter" class="letter" role="button" tabindex="0">
+          <!-- Mitad izquierda (cerrada) -->
+          <div class="letter-left">
+            <div class="letter-spine"></div>
+          </div>
+          
+          <!-- Mitad derecha (cerrada) -->
+          <div class="letter-right">
+            <div class="letter-spine"></div>
+          </div>
+
+          <!-- Contenido interior (desplegado) -->
+          <div class="letter-inner">
+            <h2 style="font-family:'Dancing Script',serif;font-size:2rem;color:#06233a;margin:0 0 1.5rem 0;">¿Quieres ser mi San Valentín?</h2>
+            
+            <div class="buttons-container">
+              <button class="btn-yes" id="btn-yes">Sí </button>
+              <button class="btn-no" id="btn-no">No </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLAROIDS DECORATIVOS -->
+      <!-- Izquierda -->
+      <div class="polaroid p1">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto1.jpg" alt="Foto 1">
+        </div>
+      </div>
+
+      <div class="polaroid p2">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto2.jpg" alt="Foto 2">
+        </div>
+      </div>
+
+      <div class="polaroid p3">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto3.jpg" alt="Foto 3">
+        </div>
+      </div>
+
+      <!-- Derecha -->
+      <div class="polaroid p4">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto4.jpg" alt="Foto 4">
+        </div>
+      </div>
+
+      <div class="polaroid p5">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto5.jpg" alt="Foto 5">
+        </div>
+      </div>
+
+      <div class="polaroid p6">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto6.jpg" alt="Foto 6">
+        </div>
+      </div>
+
+      <div class="polaroid p7">
+        <div class="pin"></div>
+        <div class="frame">
+          <img src="img/foto7.jpg" alt="Foto 7">
+        </div>
+      </div>
+
+      <!-- Contenedor de flores (se rellena con JS) -->
+      <div class="flowers-container" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script src="script4.js"></script>
+  <script src="music.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>10 cosas que amo de ti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Winter+Draw&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- REPRODUCTOR DE MÚSICA -->
+  <div class="music-player">
+    <audio id="bgMusic" autoplay loop>
+      <source src="music/cancion1.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicPlayBtn" class="music-btn" aria-label="Play/Pause música">🎵</button>
+    <div class="music-volume">
+      <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+    </div>
+  </div>
+
+  <main class="wrap">
+    <h1 class="title">10 cosas que amo de ti</h1>
+
+
+    <section class="grid" aria-label="Lista de 10 cosas que amo">
+
+      <!-- Cada tarjeta -->
+      <div class="card" data-index="1">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">1</div>
+              <div class="hint"></div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Tú sonrisa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="2">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">2</div>
+              <div class="hint">Tus ojos</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p> tus ojos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="3">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">3</div>
+              <div class="hint">Tu risa</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Tú risa</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="4">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">4</div>
+              <div class="hint">Tu apoyo</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Tú voz</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="5">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">5</div>
+              <div class="hint">Tu abrazo</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p> tus abrazos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="6">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">6</div>
+              <div class="hint">Tu bondad</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Tú cabello🙌🏻.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="7">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">7</div>
+              <div class="hint">Tus secretos</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p> Su amor por los animales.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="8">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">8</div>
+              <div class="hint">Tu curiosidad</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Lo juiciosa y estudiosa que es.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="9">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">9</div>
+              <div class="hint">Tu voz</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Contigo siento que puedo ser la mejor versión de mí.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-index="10">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="num">10</div>
+              <div class="hint">Tu ser</div>
+            </div>
+          </div>
+          <div class="card-back">
+            <p>Simplemente, te amo hasta por su humor y personalidad.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="actions" style="text-align:center;margin-top:1.2rem;">
+      <a class="btn-next" href="page2.html" aria-label="Siguiente">Siguiente</a>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="music.js"></script>
+</body>
+</html>

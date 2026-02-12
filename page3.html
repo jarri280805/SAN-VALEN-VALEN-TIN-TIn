@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Página 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700&family=Winter+Draw&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- REPRODUCTOR DE MÚSICA -->
+  <div class="music-player">
+    <audio id="bgMusic" autoplay loop>
+      <source src="music/cancion3.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicPlayBtn" class="music-btn" aria-label="Play/Pause música">🎵</button>
+    <div class="music-volume">
+      <input type="range" id="volumeSlider" min="0" max="100" value="30" class="volume-slider">
+    </div>
+  </div>
+
+  <main class="wrap" style="padding-top:3rem;padding-bottom:3rem;text-align:center;">
+    <h1 class="title">Contigo, siempre</h1>
+
+    <section class="game-area">
+      <div class="hud">
+        <div class="score">Puntaje: <span id="score">0</span></div>
+        <div class="best">Mejor: <span id="best">0</span></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="game" aria-label="Juego del gusanito romántico"></canvas>
+      </div>
+      <div style="text-align:center;margin-top:12px;">
+        <a id="nextFromGame" class="btn-next next-action" href="page4.html" style="opacity:0;pointer-events:none;">Siguiente</a>
+      </div>
+
+      <div id="overlay" class="overlay hidden">
+        <div class="overlay-card">
+          <h2 id="gameOverTitle">Me enredé en tu amor 💙</h2>
+          <p id="finalScore" style="margin:.6rem 0 1rem 0;font-family:'Playfair Display',serif;color:#222">Has obtenido <span id="finalPoints">0</span> puntos</p>
+          <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+            <button id="restart" class="btn-next">Reiniciar</button>
+            <a class="btn-next" href="index.html">Volver</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay grande para avanzar cuando llegue a 5 corazones -->
+      <div id="nextOverlay" class="next-overlay">
+        <a id="nextOverlayBtn" class="btn-next" href="page4.html">Siguiente</a>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script3.js"></script>
+  <script src="music.js"></script>
+</body>
+</html>
